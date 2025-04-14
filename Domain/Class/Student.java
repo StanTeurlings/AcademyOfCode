@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import Domain.Enummeration.Gender;
 
 public class Student {
+    private int id;
     private String email;
     private String name;
     private LocalDate birthDate;
@@ -11,7 +12,8 @@ public class Student {
     private String city;
     private String country;
 
-    public Student(String email, String name, LocalDate birthDate, Gender gender, String address, String city, String country) {
+    public Student(int id, String email, String name, LocalDate birthDate, Gender gender, String address, String city, String country) {
+        this.id = id;
         this.email = email;
         this.name = name;
         this.birthDate = birthDate;
@@ -19,6 +21,14 @@ public class Student {
         this.address = address;
         this.city = city;
         this.country = country;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {

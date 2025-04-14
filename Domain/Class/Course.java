@@ -3,18 +3,27 @@ import java.util.List;
 import Domain.Enummeration.Difficulty;
 
 public class Course {
+    private int id;
     private String name;
     private String subject;
     private String introductionText;
     private Difficulty difficulty;
-    private List<String> recommendedCourses;
+    private List<Course> recommendedCourses;
 
-    public Course(String name, String subject, String introductionText, Difficulty difficulty, List<String> recommendedCourses) {
+    public Course(int id, String name, String subject, String introductionText, Difficulty difficulty, List<String> recommendedCourses) {
+        this.id = id;
         this.name = name;
         this.subject = subject;
         this.introductionText = introductionText;
         this.difficulty = difficulty;
-        this.recommendedCourses = recommendedCourses;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -49,11 +58,11 @@ public class Course {
         this.difficulty = difficulty;
     }
 
-    public List<String> getRecommendedCourses() {
+    public List<Course> getRecommendedCourses() {
         return recommendedCourses;
     }
 
-    public void setRecommendedCourses(List<String> recommendedCourses) {
+    public void setRecommendedCourses(List<Course> recommendedCourses) {
         this.recommendedCourses = recommendedCourses;
     }
 }

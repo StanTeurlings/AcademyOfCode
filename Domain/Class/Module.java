@@ -1,16 +1,30 @@
 package Domain.Class;
 
-public class Module {
+import java.time.LocalDate;
+import Domain.Enummeration.Status;
+
+public class Module extends Content {
+    private int id;
     private String version;
     private String contactPersonName;
     private String contactPersonEmail;
     private int sequenceNumber;
 
-    public Module(String version, String contactPersonName, String contactPersonEmail, int sequenceNumber) {
+    public Module(int id, String title, String description, Status status, LocalDate publicationDate, String version, String contactPersonName, String contactPersonEmail, int sequenceNumber) {
+        super(id, title, description, status, publicationDate);
+        this.id = id;
         this.version = version;
         this.contactPersonName = contactPersonName;
         this.contactPersonEmail = contactPersonEmail;
         this.sequenceNumber = sequenceNumber;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getVersion() {
