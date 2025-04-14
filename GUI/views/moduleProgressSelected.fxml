@@ -9,18 +9,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:controller="GUI.controllers.homePageController" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="Module progress">
           <items>
-            <MenuItem mnemonicParsing="false" text="All accounts" />
-            <MenuItem mnemonicParsing="false" text="Selected account" />
+            <MenuItem mnemonicParsing="false" text="All accounts" onAction="#goToModuleProgressAll"/>
+            <MenuItem mnemonicParsing="false" text="Selected account" onAction="#goToModuleProgressSelected"/>
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Top webcasts" />
-        <Menu mnemonicParsing="false" text="Completed the course" />
+        <Menu mnemonicParsing="false" text="Top webcasts">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Top Webcasts" onAction="#goToTopWebcasts"/>
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Completed the course">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Completed the course" onAction="#goToCompletedCourse"/>
+          </items>
+        </Menu>
       </menus>
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
