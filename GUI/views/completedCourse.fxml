@@ -8,34 +8,52 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:controller="GUI.controllers.homePageController" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controllers.homePageController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="Module progress">
+        <Menu mnemonicParsing="false" text="Home">
           <items>
-            <MenuItem mnemonicParsing="false" text="All accounts" onAction="#goToModuleProgressAll"/>
-            <MenuItem mnemonicParsing="false" text="Selected account" onAction="#goToModuleProgressSelected"/>
+            <MenuItem mnemonicParsing="false" onAction="#goToHomePage" text="Go to the homepage" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Top webcasts">
+        <Menu mnemonicParsing="false" text="Module">
           <items>
-            <MenuItem mnemonicParsing="false" text="Top Webcasts" onAction="#goToTopWebcasts"/>
+            <MenuItem mnemonicParsing="false" onAction="#goToAllModules" text="All modules" />          
+            <MenuItem mnemonicParsing="false" onAction="#goToModuleProgressAll" text="All accounts" />
+            <MenuItem mnemonicParsing="false" onAction="#goToModuleProgressSelected" text="Selected account" />
+            <MenuItem mnemonicParsing="false" onAction="#goToCompletedCourse" text="Completed the course" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Completed the course">
+        <Menu mnemonicParsing="false" text="Webcast">
           <items>
-            <MenuItem mnemonicParsing="false" text="Completed the course" onAction="#goToCompletedCourse"/>
+            <MenuItem mnemonicParsing="false" onAction="#goToAllWebcasts" text="All webcasts" />
+            <MenuItem mnemonicParsing="false" onAction="#goToWebcastProgressAll" text="All accounts" />
+            <MenuItem mnemonicParsing="false" onAction="#goToWebcastProgressSelected" text="Selected account" />
+            <MenuItem mnemonicParsing="false" onAction="#goToTopWebcasts" text="Top Webcasts" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Manage students">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#goToStudents" text="Student" />
+            <MenuItem mnemonicParsing="false" onAction="#goToAddStudent" text="Add student" />
+            <MenuItem mnemonicParsing="false" onAction="#goToAddEnrollment" text="Add enrollment for student" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <ChoiceBox layoutX="67.0" layoutY="14.0" prefWidth="150.0" />
-            <Label layoutX="27.0" layoutY="18.0" text="Course:" />
-            <ListView layoutX="27.0" layoutY="46.0" prefHeight="311.0" prefWidth="581.0" />
+            <ChoiceBox layoutX="458.0" layoutY="18.0" prefWidth="150.0" />
+            <Label layoutX="412.0" layoutY="22.0" text="Course:" />
+            <ListView layoutX="27.0" layoutY="49.0" prefHeight="308.0" prefWidth="581.0" />
+            <Label layoutX="27.0" layoutY="18.0" text="Total completed:">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
          </children>
     </AnchorPane>
   </children>

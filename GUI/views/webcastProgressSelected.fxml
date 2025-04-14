@@ -46,10 +46,12 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <ChoiceBox layoutX="458.0" layoutY="18.0" prefWidth="150.0" />
-            <Label layoutX="412.0" layoutY="22.0" text="Course:" />
-            <ListView layoutX="27.0" layoutY="50.0" prefHeight="307.0" prefWidth="581.0" />
-            <Label layoutX="27.0" layoutY="18.0" text="Average total progress: ">
+            <ChoiceBox layoutX="80.0" layoutY="59.0" prefWidth="150.0" />
+            <Label layoutX="27.0" layoutY="63.0" text="Account:" />
+            <ListView layoutX="27.0" layoutY="90.0" prefHeight="267.0" prefWidth="581.0" />
+            <Label layoutX="253.0" layoutY="63.0" text="Webcast:" />
+            <ChoiceBox layoutX="306.0" layoutY="59.0" prefWidth="150.0" />
+            <Label layoutX="27.0" layoutY="20.0" text="Percentage of webcast completed: ">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>

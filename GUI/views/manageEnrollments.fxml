@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox fx:controller="GUI.controllers.homePageController" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controllers.homePageController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -44,12 +46,16 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label layoutX="136.0" layoutY="171.0" text="Welcome to the Academy Of Code">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
+            <ChoiceBox layoutX="75.0" layoutY="46.0" prefHeight="25.0" prefWidth="165.0" />
+            <Label layoutX="27.0" layoutY="50.0" text="Course:" />
+            <ListView layoutX="27.0" layoutY="84.0" prefHeight="273.0" prefWidth="581.0" />
+            <Label layoutX="27.0" layoutY="18.0" text="Account:" />
+            <ChoiceBox layoutX="75.0" layoutY="14.0" prefHeight="25.0" prefWidth="165.0" />
+            <Button layoutX="494.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Add enrollment" />
+            <Button layoutX="494.0" layoutY="46.0" mnemonicParsing="false" text="Delete enrollment" />
          </children>
     </AnchorPane>
   </children>
 </VBox>
+
+<!-- deze wordt atm niet gebruikt maar kan mis nog handig zijn, moet ff overleggen met stannie :)-->
