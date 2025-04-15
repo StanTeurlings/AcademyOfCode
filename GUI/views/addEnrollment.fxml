@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -10,52 +11,54 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controllers.homePageController">
+<VBox prefHeight="430.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controllers.homePageController">
   <children>
+    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="730.0" text="Stan Teurlings 2213315, Emre Ciftci 2217014" textFill="#aeaeae">
+      <padding>
+        <Insets bottom="1.0" left="1.0" right="10.0" top="1.0" />
+      </padding>
+    </Label>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="Home">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#goToHomePage" text="Go to the homepage" />
+            <MenuItem mnemonicParsing="false" text="Go To The Homepage" onAction="#goToHomePage"/>
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Module">
+        <Menu mnemonicParsing="false" text="Course">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#goToAllModules" text="All modules" />          
-            <MenuItem mnemonicParsing="false" onAction="#goToModuleProgressAll" text="All accounts" />
-            <MenuItem mnemonicParsing="false" onAction="#goToModuleProgressSelected" text="Selected account" />
-            <MenuItem mnemonicParsing="false" onAction="#goToCompletedCourse" text="Completed the course" />
+            <MenuItem mnemonicParsing="false" text="Course Total Progress" onAction="#goToModuleProgressAll"/>
+            <MenuItem mnemonicParsing="false" text="Course Progress Per Student" onAction="#goToModuleProgressSelected"/>
+            <MenuItem mnemonicParsing="false" text="Total Completed Per Course" onAction="#goToCompletedCourse"/>
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Webcast">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#goToAllWebcasts" text="All webcasts" />
-            <MenuItem mnemonicParsing="false" onAction="#goToWebcastProgressAll" text="All accounts" />
-            <MenuItem mnemonicParsing="false" onAction="#goToWebcastProgressSelected" text="Selected account" />
-            <MenuItem mnemonicParsing="false" onAction="#goToTopWebcasts" text="Top Webcasts" />
+            <MenuItem mnemonicParsing="false" text="Webcast Progress Per Student" onAction="#goToWebcastProgressSelected"/>
+            <MenuItem mnemonicParsing="false" text="Top Webcasts" onAction="#goToTopWebcasts"/>
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Manage students">
+        <Menu mnemonicParsing="false" text="Manage Students">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#goToStudents" text="Student" />
-            <MenuItem mnemonicParsing="false" onAction="#goToAddStudent" text="Add student" />
-            <MenuItem mnemonicParsing="false" onAction="#goToAddEnrollment" text="Add enrollment for student" />
+            <MenuItem mnemonicParsing="false" text="All Students" onAction="#goToStudents"/>
+            <MenuItem mnemonicParsing="false" text="Add Students" onAction="#goToAddStudent"/>
+            <MenuItem mnemonicParsing="false" text="Add Enrollments" onAction="#goToAddEnrollment"/>
           </items>
         </Menu>
       </menus>
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <ChoiceBox layoutX="233.0" layoutY="128.0" prefHeight="25.0" prefWidth="174.0" />
-            <Label layoutX="185.0" layoutY="132.0" text="Student:" />
-            <Button layoutX="233.0" layoutY="192.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="Add Enrollment" />
-            <Label layoutX="237.0" layoutY="97.0" text="Add Enrollment Form:">
+            <ChoiceBox layoutX="233.0" layoutY="149.0" prefHeight="25.0" prefWidth="174.0" />
+            <Label layoutX="184.0" layoutY="153.0" text="Student:" />
+            <Button layoutX="233.0" layoutY="213.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="Add Enrollment" />
+            <Label layoutX="237.0" layoutY="118.0" text="Add Enrollment Form:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <ChoiceBox layoutX="233.0" layoutY="160.0" prefHeight="25.0" prefWidth="174.0" />
-            <Label layoutX="188.0" layoutY="164.0" text="Course:" />
+            <ChoiceBox layoutX="233.0" layoutY="181.0" prefHeight="25.0" prefWidth="174.0" />
+            <Label layoutX="184.0" layoutY="185.0" text="Course:" />
          </children>
     </AnchorPane>
   </children>
