@@ -50,7 +50,7 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <ChoiceBox layoutX="80.0" layoutY="59.0" prefWidth="150.0" />
-            <Label layoutX="27.0" layoutY="63.0" text="Account:" />
+            <Label layoutX="27.0" layoutY="63.0" text="Student:" />
             <ListView layoutX="27.0" layoutY="90.0" prefHeight="267.0" prefWidth="581.0" />
             <Label layoutX="253.0" layoutY="63.0" text="Webcast:" />
             <ChoiceBox layoutX="306.0" layoutY="59.0" prefWidth="150.0" />
