@@ -1,4 +1,5 @@
 package Domain.Class;
+
 import java.time.LocalDate;
 import Domain.Enummeration.Status;
 
@@ -11,6 +12,13 @@ public abstract class Content {
 
     public Content(int id, String title, String description, Status status, LocalDate publicationDate) {
         this.id = id;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.publicationDate = publicationDate;
+    }
+
+    public Content(String title, String description, Status status, LocalDate publicationDate) {
         this.title = title;
         this.description = description;
         this.status = status;
