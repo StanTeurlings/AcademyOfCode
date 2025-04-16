@@ -20,10 +20,12 @@ public class StudentDAO {
 
     // get all students from the database
     public ObservableList<Student> getAllStudents() throws SQLException {
+        databaseConnection.openConnection();
         ObservableList<Student> students = FXCollections.observableArrayList();
         String selectStmt = "SELECT * FROM Student";
         ResultSet rs = databaseConnection.executeSQLSelectStatement(selectStmt);
 
+        System.out.println("getAllStudents() resultSet: " + rs);
         while (rs.next()) {
             int id = rs.getInt("id");
             String email = rs.getString("email").trim();
@@ -41,6 +43,7 @@ public class StudentDAO {
             student.setId(id);
             students.add(student);
         }
+        databaseConnection.closeConnection();
         return students;
     }
 
