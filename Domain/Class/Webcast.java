@@ -12,7 +12,8 @@ public class Webcast extends Content {
     private String presenterName;
     private String presenterOrganisation;
 
-    public Webcast(int id, String title, String description, Status status, LocalDate publicationDate, LocalTime duration, String url, int presenterId, String presenterName, String presenterOrganisation) {
+    public Webcast(int id, String title, String description, Status status, LocalDate publicationDate,
+            LocalTime duration, String url, int presenterId, String presenterName, String presenterOrganisation) {
         super(id, title, description, status, publicationDate);
         this.id = id;
         this.duration = duration;
@@ -20,6 +21,16 @@ public class Webcast extends Content {
         this.presenterId = presenterId;
         this.presenterName = presenterName;
         this.presenterOrganisation = presenterOrganisation;
+    }
+
+    public Webcast(String title) {
+        super(title, null, null, null);
+        this.duration = null;
+        this.url = null;
+        this.presenterId = 0;
+        this.presenterName = null;
+        this.presenterOrganisation = null;
+
     }
 
     public int getId() {

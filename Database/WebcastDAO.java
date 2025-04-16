@@ -2,6 +2,9 @@ package Database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
+
+import Domain.Class.Webcast;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -11,6 +14,24 @@ public class WebcastDAO {
     // database connection
     public WebcastDAO(DatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
+    }
+
+    // get all webcasts
+    public ObservableList<Webcast> getAllWebcasts() throws SQLException {
+        databaseConnection.openConnection();
+        ObservableList<Webcast> webcasts = FXCollections.observableArrayList();
+        String selectStmt = "SELECT * FROM Webcast JOIN Content ON Webcast.contentId = Content.id";
+        ResultSet rs = databaseConnection.executeSQLSelectStatement(selectStmt);
+
+        while (rs.next()) {
+            String title = rs.getString("title").trim();
+
+            Webcast webcast = new Webcast(title);
+            webcast.setId(rs.getInt("id"));
+            webcasts.add(webcast);
+        }
+        databaseConnection.closeConnection();
+        return webcasts;
     }
 
     // get top 3 webcasts
