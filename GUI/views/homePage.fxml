@@ -25,7 +25,6 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Course">
           <items>
-            <!-- <MenuItem mnemonicParsing="false" text="All modules" onAction="#goToAllModules"/>           -->
             <MenuItem mnemonicParsing="false" text="Course Total Progress" onAction="#goToModuleProgressAll"/>
             <MenuItem mnemonicParsing="false" text="Course Progress Per Student" onAction="#goToModuleProgressSelected"/>
             <MenuItem mnemonicParsing="false" text="Total Completed Per Course" onAction="#goToCompletedCourse"/>
@@ -33,8 +32,6 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Webcast">
           <items>
-            <!-- <MenuItem mnemonicParsing="false" text="All webcasts" onAction="#goToAllWebcasts"/> -->
-            <!-- <MenuItem mnemonicParsing="false" text="All accounts" onAction="#goToWebcastProgressAll"/> -->
             <MenuItem mnemonicParsing="false" text="Webcast Progress Per Student" onAction="#goToWebcastProgressSelected"/>
             <MenuItem mnemonicParsing="false" text="Top Webcasts" onAction="#goToTopWebcasts"/>
           </items>

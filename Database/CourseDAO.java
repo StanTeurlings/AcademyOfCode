@@ -92,8 +92,7 @@ public class CourseDAO {
         return progress;
     }
 
-    // count students who have completed the course (100% watched all module
-    // content)
+    // count students who have completed the course (100% watched all module content)
     public int countStudentsInCourse(int courseId) throws SQLException {
         databaseConnection.openConnection();
 

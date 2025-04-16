@@ -406,19 +406,19 @@ public class homePageController implements Initializable {
     }
 
     // Validatie en UI helpers
-    private boolean isEmpty(String value) {
+    public boolean isEmpty(String value) {
         return value == null || value.trim().isEmpty();
     }
 
-    private boolean isValidEmail(String email) {
+    public boolean isValidEmail(String email) {
         return email.matches("^[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
     }
 
-    private boolean isValidPostalCode(String code) {
+    public boolean isValidPostalCode(String code) {
         return code.matches("^\\d{4}[A-Za-z]{2}$");
     }
 
-    private boolean isValidBirthDate(LocalDate date) {
+    public boolean isValidBirthDate(LocalDate date) {
         return date != null && !date.isAfter(LocalDate.now());
     }
 

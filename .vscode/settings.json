@@ -26,6 +26,13 @@
     "c:\\Users\\s_lin\\Downloads\\sqljdbc_12.10.0.0_enu\\sqljdbc_12.10\\enu\\jars\\mssql-jdbc-12.10.0.jre11-sources.jar",
     "c:\\Users\\Emre\\Downloads\\sqljdbc_12.10.0.0_enu\\sqljdbc_12.10\\enu\\jars\\mssql-jdbc-12.10.0.jre11.jar",
     "c:\\Users\\Emre\\Downloads\\sqljdbc_12.10.0.0_enu\\sqljdbc_12.10\\enu\\jars\\mssql-jdbc-12.10.0.jre11-javadoc.jar",
-    "c:\\Users\\Emre\\Downloads\\sqljdbc_12.10.0.0_enu\\sqljdbc_12.10\\enu\\jars\\mssql-jdbc-12.10.0.jre11-sources.jar"
+    "c:\\Users\\Emre\\Downloads\\sqljdbc_12.10.0.0_enu\\sqljdbc_12.10\\enu\\jars\\mssql-jdbc-12.10.0.jre11-sources.jar",
+    "c:\\Users\\Emre\\Documents\\junit\\apiguardian-api-1.1.2.jar",
+    "c:\\Users\\Emre\\Documents\\junit\\junit-jupiter-api-5.10.2.jar",
+    "c:\\Users\\Emre\\Documents\\junit\\junit-jupiter-engine-5.10.2.jar",
+    "c:\\Users\\Emre\\Documents\\junit\\opentest4j-1.2.0.jar",
+    "c:\\Users\\Emre\\Documents\\junit\\junit-platform-commons-1.10.2.jar",
+    "c:\\Users\\Emre\\Documents\\junit\\junit-platform-engine-1.10.2.jar",
+    "c:\\Users\\Emre\\Documents\\junit\\opentest4j-1.3.0.jar"
   ]
 }

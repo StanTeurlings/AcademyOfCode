@@ -2,8 +2,6 @@ package Database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalTime;
-
 import Domain.Class.Webcast;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

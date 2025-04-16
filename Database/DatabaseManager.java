@@ -57,7 +57,6 @@ public class DatabaseManager {
     }
 
     // student methods
-
     // get all students
     public ObservableList<Student> getAllStudents() {
         ObservableList<Student> students = FXCollections.observableArrayList();
