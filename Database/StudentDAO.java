@@ -80,6 +80,7 @@ public class StudentDAO {
 
     // get progress of module for a student
     public ObservableList<String> getProgress(int studentId, int moduleId) throws SQLException {
+        databaseConnection.openConnection();
         ObservableList<String> progress = FXCollections.observableArrayList();
 
         String selectStmt = """
@@ -99,29 +100,41 @@ public class StudentDAO {
             progress.add(name + ": " + String.format("%.2f", percentageWatched) + "% watched");
         }
 
+        databaseConnection.closeConnection();
         return progress;
     }
 
-    // get progress of webcast for a student
-    public ObservableList<String> getWebcastProgress(int studentId, int webcastId) throws SQLException {
+    public ObservableList<String> getWebcastProgress(int studentId, int webcastContentId) throws SQLException {
+        System.out.println("[DEBUG] getWebcastProgress gestart met studentId=" + studentId + " en webcastId=" + webcastContentId);
+    
+        databaseConnection.openConnection();
+    
         ObservableList<String> progress = FXCollections.observableArrayList();
-
+    
         String selectStmt = """
-                SELECT c.title, wc.percentageWatched
-                FROM WatchedContent wc
-                JOIN Content c ON wc.contentId = c.id
-                JOIN Webcast w ON c.id = w.contentId
-                WHERE wc.studentId = %d AND w.contentId = %d
-                """.formatted(studentId, webcastId);
-
+            SELECT c.title, wc.percentageWatched
+            FROM WatchedContent wc
+            JOIN Content c ON wc.contentId = c.id
+            JOIN Webcast w ON c.id = w.contentId
+            WHERE wc.studentId = %d AND w.contentId = %d
+        """.formatted(studentId, webcastContentId);
+    
+        System.out.println("[DEBUG] Query: " + selectStmt);
         ResultSet rs = databaseConnection.executeSQLSelectStatement(selectStmt);
-
+    
+        if (rs == null) {
+            System.out.println("[ERROR] ResultSet is null! Mogelijk databasefout.");
+            return progress;
+        }
+    
         while (rs.next()) {
             String title = rs.getString("title").trim();
             double percentageWatched = rs.getDouble("percentageWatched");
             progress.add(title + ": " + String.format("%.2f", percentageWatched) + "% watched");
         }
-
+    
+        databaseConnection.closeConnection();
         return progress;
     }
+
 }

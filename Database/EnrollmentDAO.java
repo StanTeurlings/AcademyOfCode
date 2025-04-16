@@ -10,6 +10,8 @@ public class EnrollmentDAO {
 
     // add enrollment to database
     public void addEnrollment(int studentId, int courseId) {
+        databaseConnection.openConnection();
+
         StringBuilder insertStmt = new StringBuilder();
         insertStmt.append("INSERT INTO Enrollment (studentId, courseId, enrollmentDate) ");
         insertStmt.append("VALUES (");
@@ -20,5 +22,7 @@ public class EnrollmentDAO {
         insertStmt.append("GETDATE()"); // Use GETDATE() for current date in SQL Server
         insertStmt.append(")");
         databaseConnection.executeSQLUpdateStatement(insertStmt.toString());
+
+        databaseConnection.closeConnection();
     }
 }

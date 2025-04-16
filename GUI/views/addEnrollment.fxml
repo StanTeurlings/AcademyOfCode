@@ -51,13 +51,13 @@
          <children>
             <ChoiceBox fx:id="studentChoiceBox" layoutX="233.0" layoutY="149.0" prefHeight="25.0" prefWidth="174.0" />
             <Label layoutX="184.0" layoutY="153.0" text="Student:" />
-            <Button layoutX="233.0" layoutY="213.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="Add Enrollment" />
+            <Button layoutX="233.0" layoutY="213.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="Add Enrollment" onAction="#handleAddEnrollment"/>
             <Label layoutX="237.0" layoutY="118.0" text="Add Enrollment Form:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <ChoiceBox layoutX="233.0" layoutY="181.0" prefHeight="25.0" prefWidth="174.0" />
+            <ChoiceBox fx:id="courseChoiceBox" layoutX="233.0" layoutY="181.0" prefHeight="25.0" prefWidth="174.0" />
             <Label layoutX="184.0" layoutY="185.0" text="Course:" />
          </children>
     </AnchorPane>

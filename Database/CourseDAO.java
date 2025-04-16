@@ -36,6 +36,7 @@ public class CourseDAO {
 
     // get avarage watched content of modules in course
     public ObservableList<String> getModuleProgressForCourse(int courseId) throws SQLException {
+        databaseConnection.openConnection();
         ObservableList<String> progress = FXCollections.observableArrayList();
 
         String selectStmt = """
@@ -58,11 +59,13 @@ public class CourseDAO {
                     + "% watched");
         }
 
+        databaseConnection.closeConnection();
         return progress;
     }
 
     // get watched content of every module for a course on a specific student
     public ObservableList<String> getModuleProgressForStudent(int courseId, int studentId) throws SQLException {
+        databaseConnection.openConnection();
         ObservableList<String> progress = FXCollections.observableArrayList();
 
         String selectStmt = """
@@ -85,12 +88,15 @@ public class CourseDAO {
                     + "% watched");
         }
 
+        databaseConnection.closeConnection();
         return progress;
     }
 
     // count students who have completed the course (100% watched all module
     // content)
     public int countStudentsInCourse(int courseId) throws SQLException {
+        databaseConnection.openConnection();
+
         String selectStmt = """
                 SELECT COUNT(*) AS completedStudentCount
                 FROM Enrollment e
@@ -108,7 +114,14 @@ public class CourseDAO {
                 """.formatted(courseId, courseId);
 
         ResultSet rs = databaseConnection.executeSQLSelectStatement(selectStmt);
-        rs.next();
-        return rs.getInt("completedStudentCount");
+
+        int count = 0;
+        if (rs != null && rs.next()) {
+            count = rs.getInt("completedStudentCount");
+        }
+
+        databaseConnection.closeConnection();
+        return count;
     }
+
 }

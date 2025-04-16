@@ -1,9 +1,12 @@
 package GUI.controllers;
 
+import Database.CourseDAO;
 import Database.DatabaseConnection;
 import Database.StudentDAO;
 import Database.WebcastDAO;
+import Domain.Class.Course;
 import Domain.Class.Student;
+import Domain.Class.Webcast;
 import Domain.Enummeration.Gender;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.util.StringConverter;
+import Database.EnrollmentDAO;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -25,13 +29,16 @@ public class homePageController implements Initializable {
 
     private final StudentDAO studentDAO = new StudentDAO(new DatabaseConnection());
     private final WebcastDAO webcastDAO = new WebcastDAO(new DatabaseConnection());
+    private final CourseDAO courseDAO = new CourseDAO(new DatabaseConnection());
+    private final EnrollmentDAO enrollmentDAO = new EnrollmentDAO(new DatabaseConnection());
+
     private final ObservableList<Student> studentList = FXCollections.observableArrayList();
 
     public void setMainController(mainController mainController) {
         this.mainController = mainController;
     }
 
-    // Navigatie van views
+    // Navigatie
     @FXML
     private void goToHomePage(ActionEvent event) {
         mainController.switchScene("homepage.fxml");
@@ -82,7 +89,7 @@ public class homePageController implements Initializable {
         mainController.switchScene("addEnrollment.fxml");
     }
 
-    // Velden voor student toevoegen (addStudent.fxml)
+    // Velden uit addStudent.fxml
     @FXML
     private TextField nameField;
     @FXML
@@ -102,7 +109,7 @@ public class homePageController implements Initializable {
     @FXML
     private TextField postalCodeField;
 
-    // Optioneel: student tabel en lijsten (voor andere schermen)
+    // Tabellen en lijsten
     @FXML
     private TableView<Student> studentTable;
     @FXML
@@ -116,16 +123,28 @@ public class homePageController implements Initializable {
     @FXML
     private ListView<String> webcastTopThreeList;
     @FXML
+    private ListView<String> courseProgressList; // voor 'per student' view
+    @FXML
+    private ListView<String> completedCourseList;
+    @FXML
+    private ListView<String> webcastProgressList; // ListView voor voortgang
+
+    // ChoiceBoxes
+    @FXML
     private ChoiceBox<Student> studentChoiceBox;
+    @FXML
+    private ChoiceBox<Webcast> webcastChoiceBox;
+    @FXML
+    private ChoiceBox<Course> courseChoiceBox;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Gender keuze vullen
+        // Gender vullen
         if (genderBox != null) {
             genderBox.setItems(FXCollections.observableArrayList(Gender.values()));
         }
 
-        // Tabel studentinfo (optioneel andere schermen)
+        // Studententabel
         if (studentTable != null) {
             idColumn.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getId()).asObject());
             nameColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getName()));
@@ -133,7 +152,7 @@ public class homePageController implements Initializable {
             studentTable.setItems(studentList);
         }
 
-        // Lijst met alle studenten
+        // Alle studentenlijst
         if (allStudentList != null) {
             try {
                 ObservableList<Student> studentsFromDB = studentDAO.getAllStudents();
@@ -145,27 +164,26 @@ public class homePageController implements Initializable {
                         if (empty || student == null) {
                             setText(null);
                         } else {
-                            setText(student.getName() + " (" + student.getEmail() + ") - " +
-                                    student.getGender().toString().toLowerCase() + " " + student.getBirthDate());
+                            setText(student.getName() + " (" + student.getEmail() + ")");
                         }
                     }
                 });
             } catch (SQLException e) {
-                showAlert("Fout bij het ophalen van studenten: " + e.getMessage());
+                showAlert("Fout bij ophalen studenten: " + e.getMessage());
             }
         }
 
-        // Top 3 webcasts lijst
+        // Top webcasts
         if (webcastTopThreeList != null) {
             try {
                 ObservableList<String> topWebcasts = webcastDAO.getTop3Webcasts();
                 webcastTopThreeList.setItems(topWebcasts);
             } catch (SQLException e) {
-                showAlert("Fout bij ophalen top 3 webcasts: " + e.getMessage());
+                showAlert("Fout bij ophalen webcasts: " + e.getMessage());
             }
         }
 
-        // ChoiceBox met alle studenten
+        // StudentChoiceBox
         if (studentChoiceBox != null) {
             try {
                 ObservableList<Student> students = studentDAO.getAllStudents();
@@ -182,12 +200,54 @@ public class homePageController implements Initializable {
                     }
                 });
             } catch (SQLException e) {
-                showAlert("Fout bij laden van studentlijst voor keuze: " + e.getMessage());
+                showAlert("Fout bij laden studenten: " + e.getMessage());
+            }
+        }
+
+        // WebcastChoiceBox
+        if (webcastChoiceBox != null) {
+            try {
+                ObservableList<Webcast> webcasts = webcastDAO.getAllWebcasts();
+                webcastChoiceBox.setItems(webcasts);
+                webcastChoiceBox.setConverter(new StringConverter<>() {
+                    @Override
+                    public String toString(Webcast webcast) {
+                        return webcast == null ? "" : webcast.getTitle();
+                    }
+
+                    @Override
+                    public Webcast fromString(String string) {
+                        return null;
+                    }
+                });
+            } catch (SQLException e) {
+                showAlert("Fout bij laden webcasts: " + e.getMessage());
+            }
+        }
+
+        // CourseChoiceBox
+        if (courseChoiceBox != null) {
+            try {
+                ObservableList<Course> courses = courseDAO.getAllCourses();
+                courseChoiceBox.setItems(courses);
+                courseChoiceBox.setConverter(new StringConverter<>() {
+                    @Override
+                    public String toString(Course course) {
+                        return course == null ? "" : course.getName();
+                    }
+
+                    @Override
+                    public Course fromString(String string) {
+                        return null;
+                    }
+                });
+            } catch (SQLException e) {
+                showAlert("Fout bij laden courses: " + e.getMessage());
             }
         }
     }
 
-    // 🔹 Toevoegen van student via formulier in addStudent.fxml
+    // Student toevoegen
     @FXML
     private void handleAddStudentForm(ActionEvent event) {
         String name = nameField.getText();
@@ -201,8 +261,7 @@ public class homePageController implements Initializable {
         String postal = postalCodeField.getText();
 
         if (isEmpty(name) || isEmpty(email) || birth == null || gender == null ||
-                isEmpty(country) || isEmpty(city) || isEmpty(address) ||
-                isEmpty(houseNr) || isEmpty(postal)) {
+                isEmpty(country) || isEmpty(city) || isEmpty(address) || isEmpty(houseNr) || isEmpty(postal)) {
             showAlert("Alle velden moeten ingevuld zijn.");
             return;
         }
@@ -213,7 +272,7 @@ public class homePageController implements Initializable {
         }
 
         if (!isValidBirthDate(birth)) {
-            showAlert("Geboortedatum mag niet leeg zijn of in de toekomst liggen.");
+            showAlert("Geboortedatum mag niet in de toekomst liggen.");
             return;
         }
 
@@ -233,29 +292,130 @@ public class homePageController implements Initializable {
         }
     }
 
-    // 🧼 Helpers
-    private void clearForm() {
-        nameField.clear();
-        emailField.clear();
-        birthDatePicker.setValue(null);
-        genderBox.setValue(null);
-        countryField.clear();
-        cityField.clear();
-        addressField.clear();
-        houseNumberField.clear();
-        postalCodeField.clear();
+    // Webcast voortgang zoeken
+    @FXML
+    private void handleSearchWebcastProgress(ActionEvent event) {
+        Student selectedStudent = studentChoiceBox.getValue();
+        Webcast selectedWebcast = webcastChoiceBox.getValue();
+
+        if (selectedStudent == null || selectedWebcast == null) {
+            showAlert("Selecteer een student en een webcast.");
+            return;
+        }
+
+        try {
+            ObservableList<String> progress = studentDAO.getWebcastProgress(
+                    selectedStudent.getId(),
+                    selectedWebcast.getId());
+
+            if (progress.isEmpty()) {
+                webcastProgressList.setItems(FXCollections.observableArrayList("Geen voortgang gevonden."));
+            } else {
+                webcastProgressList.setItems(progress);
+            }
+        } catch (SQLException e) {
+            showAlert("Fout bij ophalen voortgang: " + e.getMessage());
+        }
     }
 
+    @FXML
+    private void handleSearchCompletedCourse(ActionEvent event) {
+        Course selectedCourse = courseChoiceBox.getValue();
+
+        if (selectedCourse == null) {
+            showAlert("Selecteer een course.");
+            return;
+        }
+
+        try {
+            int completedCount = courseDAO.countStudentsInCourse(selectedCourse.getId());
+
+            ObservableList<String> result = FXCollections.observableArrayList(
+                    "Aantal studenten die de course volledig voltooid hebben: " + completedCount);
+            completedCourseList.setItems(result);
+        } catch (SQLException e) {
+            showAlert("Fout bij ophalen aantal voltooide studenten: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleSearchCourseProgressAll(ActionEvent event) {
+        Course selectedCourse = courseChoiceBox.getValue();
+
+        if (selectedCourse == null) {
+            showAlert("Selecteer een course.");
+            return;
+        }
+
+        try {
+            ObservableList<String> progress = courseDAO.getModuleProgressForCourse(selectedCourse.getId());
+            if (progress.isEmpty()) {
+                webcastProgressList.setItems(FXCollections.observableArrayList("Geen voortgang gevonden."));
+            } else {
+                webcastProgressList.setItems(progress);
+            }
+        } catch (SQLException e) {
+            showAlert("Fout bij ophalen course voortgang: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleSearchCourseProgressForStudent(ActionEvent event) {
+        Student selectedStudent = studentChoiceBox.getValue();
+        Course selectedCourse = courseChoiceBox.getValue();
+
+        if (selectedStudent == null || selectedCourse == null) {
+            showAlert("Selecteer zowel een student als een course.");
+            return;
+        }
+
+        try {
+            ObservableList<String> progress = courseDAO.getModuleProgressForStudent(
+                    selectedCourse.getId(),
+                    selectedStudent.getId());
+
+            if (progress.isEmpty()) {
+                courseProgressList.setItems(FXCollections.observableArrayList("Geen voortgang gevonden."));
+            } else {
+                courseProgressList.setItems(progress);
+            }
+        } catch (SQLException e) {
+            showAlert("Fout bij ophalen course voortgang: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleAddEnrollment(ActionEvent event) {
+        Student selectedStudent = studentChoiceBox.getValue();
+        Course selectedCourse = courseChoiceBox.getValue();
+
+        if (selectedStudent == null || selectedCourse == null) {
+            showAlert("Selecteer zowel een student als een course.");
+            return;
+        }
+
+        try {
+            enrollmentDAO.addEnrollment(selectedStudent.getId(), selectedCourse.getId());
+            showConfirmation("Inschrijving succesvol toegevoegd!");
+
+            studentChoiceBox.setValue(null);
+            courseChoiceBox.setValue(null);
+        } catch (Exception e) {
+            showAlert("Fout bij toevoegen inschrijving: " + e.getMessage());
+        }
+    }
+
+    // Validatie en UI helpers
     private boolean isEmpty(String value) {
         return value == null || value.trim().isEmpty();
     }
 
     private boolean isValidEmail(String email) {
-        return email != null && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+        return email.matches("^[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
     }
 
     private boolean isValidPostalCode(String code) {
-        return code != null && code.matches("^\\d{4}[A-Za-z]{2}$");
+        return code.matches("^\\d{4}[A-Za-z]{2}$");
     }
 
     private boolean isValidBirthDate(LocalDate date) {
@@ -276,5 +436,17 @@ public class homePageController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(msg);
         alert.showAndWait();
+    }
+
+    private void clearForm() {
+        nameField.clear();
+        emailField.clear();
+        birthDatePicker.setValue(null);
+        genderBox.setValue(null);
+        countryField.clear();
+        cityField.clear();
+        addressField.clear();
+        houseNumberField.clear();
+        postalCodeField.clear();
     }
 }

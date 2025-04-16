@@ -74,4 +74,10 @@ public class Course {
     public void setRecommendedCourses(List<Course> recommendedCourses) {
         this.recommendedCourses = recommendedCourses;
     }
+    
+    @Override
+    public String toString() {
+        return name; 
+    }
+    
 }

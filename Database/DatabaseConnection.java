@@ -17,42 +17,45 @@ public class DatabaseConnection {
 
     // Open connection with the database
     public boolean openConnection() {
-        boolean result = false;
+    boolean result = false;
 
-        if (connection == null) {
-            try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String connectionUrl = "jdbc:sqlserver://localhost;databaseName=AcademyOfCode;integratedSecurity=true;encrypt=true;trustServerCertificate=true;";
-                connection = DriverManager.getConnection(connectionUrl);
-
-                if (connection != null) {
-                    statement = connection.createStatement();
-                }
-                System.out.println("database open");
-                result = true;
-            } catch (SQLException e) {
-                System.out.println(e);
-                result = false;
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            result = true;
+    try {
+        if (connection == null || connection.isClosed()) {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String connectionUrl = "jdbc:sqlserver://localhost;databaseName=AcademyOfCode;integratedSecurity=true;encrypt=true;trustServerCertificate=true;";
+            connection = DriverManager.getConnection(connectionUrl);
         }
-        return result;
+
+        if (statement == null || statement.isClosed()) {
+            statement = connection.createStatement();
+        }
+
+        System.out.println("database open");
+        result = true;
+    } catch (SQLException e) {
+        System.out.println("[ERROR] SQL Fout in openConnection(): " + e.getMessage());
+        result = false;
+    } catch (ClassNotFoundException ex) {
+        System.out.println("[ERROR] Driver niet gevonden: " + ex.getMessage());
     }
 
-    // the connection is open
+    return result;
+}
+
+
     public boolean connectionIsOpen() {
         boolean open = false;
 
         if (connection != null && statement != null) {
             try {
                 open = !connection.isClosed() && !statement.isClosed();
+                System.out.println("[DEBUG] connectionIsOpen() = " + open);
             } catch (SQLException e) {
-                System.out.println(e);
+                System.out.println("[ERROR] Fout in connectionIsOpen(): " + e.getMessage());
                 open = false;
             }
+        } else {
+            System.out.println("[ERROR] connection or statement is null!");
         }
 
         return open;
@@ -69,17 +72,22 @@ public class DatabaseConnection {
         }
     }
 
-    // sql statement to select data
     public ResultSet executeSQLSelectStatement(String query) {
         ResultSet resultset = null;
+
         if (query != null && connectionIsOpen()) {
             try {
                 resultset = statement.executeQuery(query);
             } catch (SQLException e) {
-                System.out.println(e);
+                System.out.println("[ERROR] Fout bij uitvoeren query: " + e.getMessage());
                 resultset = null;
             }
+        } else {
+            System.out.println("[ERROR] Select statement niet uitgevoerd. connectionIsOpen() = false");
+            System.out.println("[DEBUG] connection == null ? " + (connection == null));
+            System.out.println("[DEBUG] statement == null ? " + (statement == null));
         }
+
         return resultset;
     }
 
