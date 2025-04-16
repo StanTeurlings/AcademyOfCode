@@ -1,5 +1,6 @@
 package Database;
 
+import Domain.Class.Course;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -12,6 +13,25 @@ public class CourseDAO {
     // database connection
     public CourseDAO(DatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
+    }
+
+    // get all courses from the database
+    public ObservableList<Course> getAllCourses() throws SQLException {
+        databaseConnection.openConnection();
+        ObservableList<Course> courses = FXCollections.observableArrayList();
+        String selectStmt = "SELECT * FROM Course";
+        ResultSet rs = databaseConnection.executeSQLSelectStatement(selectStmt);
+
+        while (rs.next()) {
+            String name = rs.getString("name").trim();
+
+            Course course = new Course(name);
+            course.setId(rs.getInt("id"));
+            courses.add(course);
+        }
+
+        databaseConnection.closeConnection();
+        return courses;
     }
 
     // get avarage watched content of modules in course

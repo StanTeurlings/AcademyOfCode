@@ -1,4 +1,5 @@
 package Domain.Class;
+
 import java.util.List;
 import Domain.Enummeration.Difficulty;
 
@@ -10,12 +11,20 @@ public class Course {
     private Difficulty difficulty;
     private List<Course> recommendedCourses;
 
-    public Course(int id, String name, String subject, String introductionText, Difficulty difficulty, List<String> recommendedCourses) {
+    public Course(int id, String name, String subject, String introductionText, Difficulty difficulty,
+            List<String> recommendedCourses) {
         this.id = id;
         this.name = name;
         this.subject = subject;
         this.introductionText = introductionText;
         this.difficulty = difficulty;
+    }
+
+    public Course(String name) {
+        this.name = name;
+        this.subject = null;
+        this.introductionText = null;
+        this.difficulty = null;
     }
 
     public int getId() {
