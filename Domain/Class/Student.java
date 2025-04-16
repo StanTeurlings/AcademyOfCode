@@ -40,8 +40,6 @@ public class Student {
         this.postalCode = postalCode;
         this.city = city;
         this.country = country;
-        this.houseNumber = houseNumber;
-        this.postalCode = postalCode;
     }
 
     public int getId() {

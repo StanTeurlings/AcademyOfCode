@@ -49,9 +49,10 @@ public class StudentDAO {
 
     // add a student to the database
     public void addStudent(Student student) {
+        databaseConnection.openConnection();
         StringBuilder insertStmt = new StringBuilder();
         insertStmt.append(
-                "INSERT INTO Student (email, name, birthDate, gender, adress, houseNumber, postalCode, city, country) ");
+                "INSERT INTO Student (email, name, birthDate, gender, address, houseNumber, postalCode, city, country) ");
         insertStmt.append("VALUES ('");
         insertStmt.append(student.getEmail());
         insertStmt.append("', '");
@@ -74,6 +75,7 @@ public class StudentDAO {
         insertStmt.append("')");
 
         databaseConnection.executeSQLUpdateStatement(insertStmt.toString());
+        databaseConnection.closeConnection();
     }
 
     // get progress of module for a student
