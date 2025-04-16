@@ -68,18 +68,27 @@ public class CourseDAO {
         return progress;
     }
 
-    // count student in course
+    // count students who have completed the course (100% watched all module
+    // content)
     public int countStudentsInCourse(int courseId) throws SQLException {
         String selectStmt = """
-                SELECT COUNT(*) AS studentCount
-                FROM Student s
-                JOIN Enrollment e ON s.id = e.studentId
-                JOIN Course c ON e.courseId = c.id
-                WHERE c.id = %d
-                """.formatted(courseId);
+                SELECT COUNT(*) AS completedStudentCount
+                FROM Enrollment e
+                JOIN Student s ON s.id = e.studentId
+                WHERE e.courseId = %d
+                AND NOT EXISTS (
+                    SELECT *
+                    FROM Module m
+                    JOIN Content c ON m.contentId = c.id
+                    LEFT JOIN WatchedContent wc
+                        ON wc.contentId = c.id AND wc.studentId = s.id
+                    WHERE m.courseId = %d
+                    AND (wc.percentageWatched IS NULL OR wc.percentageWatched < 100)
+                )
+                """.formatted(courseId, courseId);
 
         ResultSet rs = databaseConnection.executeSQLSelectStatement(selectStmt);
         rs.next();
-        return rs.getInt("studentCount");
+        return rs.getInt("completedStudentCount");
     }
 }
