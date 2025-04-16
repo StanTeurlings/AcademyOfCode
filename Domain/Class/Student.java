@@ -1,4 +1,5 @@
 package Domain.Class;
+
 import java.time.LocalDate;
 import Domain.Enummeration.Gender;
 
@@ -9,16 +10,34 @@ public class Student {
     private LocalDate birthDate;
     private Gender gender;
     private String address;
+    private String houseNumber;
+    private String postalCode;
     private String city;
     private String country;
 
-    public Student(int id, String email, String name, LocalDate birthDate, Gender gender, String address, String city, String country) {
+    public Student(int id, String email, String name, LocalDate birthDate, Gender gender, String address,
+            String houseNumber, String postalCode, String city, String country) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
         this.address = address;
+        this.houseNumber = houseNumber;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.country = country;
+    }
+
+    public Student(String email, String name, LocalDate birthDate, Gender gender, String address,
+            String houseNumber, String postalCode, String city, String country) {
+        this.email = email;
+        this.name = name;
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.address = address;
+        this.houseNumber = houseNumber;
+        this.postalCode = postalCode;
         this.city = city;
         this.country = country;
     }
@@ -69,6 +88,22 @@ public class Student {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public String getCity() {
