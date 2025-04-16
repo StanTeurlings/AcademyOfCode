@@ -22,7 +22,7 @@ public class DatabaseConnection {
         if (connection == null) {
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String connectionUrl = "jdbc:sqlserver://localhost;databaseName=AcademyOfCode;user=Username;password=Password;encrypt=true;trustServerCertificate=true;";
+                String connectionUrl = "jdbc:sqlserver://localhost;databaseName=AcademyOfCode;integratedSecurity=true;encrypt=true;trustServerCertificate=true;";
                 connection = DriverManager.getConnection(connectionUrl);
 
                 if (connection != null) {

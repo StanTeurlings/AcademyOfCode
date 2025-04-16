@@ -6,7 +6,7 @@
             "name": "Launch JavaFX Application",
             "request": "launch",
             "mainClass": "GUI.main",
-            "vmArgs": "--module-path \"c:\\Program Files\\Eclipse Adoptium\\javafx-sdk-21.0.5\\lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"c:\\Program Files\\Eclipse Adoptium\\javafx-sdk-21.0.5\\lib\" --add-modules javafx.controls,javafx.fxml -Djava.library.path=\"C:\\Users\\s_lin\\Downloads\\sqljdbc_12.10.0.0_enu\\sqljdbc_12.10\\enu\\auth\\x64\""
         }
     ]
 }

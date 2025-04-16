@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="430.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controllers.homePageController">
+<VBox prefHeight="430.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21.0.5" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controllers.homePageController">
   <children>
     <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="730.0" text="Stan Teurlings 2213315, Emre Ciftci 2217014" textFill="#aeaeae">
       <padding>
