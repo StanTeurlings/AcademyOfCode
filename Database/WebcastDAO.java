@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class WebcastDAO {
+
     DatabaseConnection databaseConnection;
 
     // database connection
@@ -36,7 +37,9 @@ public class WebcastDAO {
 
     // get top 3 webcasts
     public ObservableList<String> getTop3Webcasts() throws SQLException {
+        databaseConnection.openConnection();
         ObservableList<String> webcasts = FXCollections.observableArrayList();
+
 
         String selectStmt = """
                 SELECT TOP 3
@@ -60,6 +63,7 @@ public class WebcastDAO {
             webcasts.add("Webcast " + id + " (" + title + "): " + studentCount + " students watched");
         }
 
+        databaseConnection.closeConnection();
         return webcasts;
     }
 }

@@ -70,7 +70,7 @@
             <Label layoutX="147.0" layoutY="246.0" text="Address:" />
             <Label layoutX="147.0" layoutY="278.0" text="HouseNumber:" />
             <Label layoutX="147.0" layoutY="309.0" text="Postal Code:" />
-            <Button layoutX="234.0" layoutY="338.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="Add Student" onAction="#handleAddStudent"/>
+            <Button layoutX="234.0" layoutY="338.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="Add Student" onAction="#handleAddStudentForm"/>
             <Label layoutX="249.0" layoutY="16.0" text="Add Student Form:">
                <font>
                   <Font name="System Bold" size="16.0" />
