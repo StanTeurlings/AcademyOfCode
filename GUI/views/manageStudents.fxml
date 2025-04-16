@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:controller="GUI.controllers.homePageController" prefHeight="430.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="430.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controllers.homePageController">
   <children>
     <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="730.0" text="Stan Teurlings 2213315, Emre Ciftci 2217014" textFill="#aeaeae">
       <padding>
@@ -25,7 +26,6 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Course">
           <items>
-            <!-- <MenuItem mnemonicParsing="false" text="All modules" onAction="#goToAllModules"/>           -->
             <MenuItem mnemonicParsing="false" text="Course Total Progress" onAction="#goToModuleProgressAll"/>
             <MenuItem mnemonicParsing="false" text="Course Progress Per Student" onAction="#goToModuleProgressSelected"/>
             <MenuItem mnemonicParsing="false" text="Total Completed Per Course" onAction="#goToCompletedCourse"/>
@@ -33,8 +33,6 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Webcast">
           <items>
-            <!-- <MenuItem mnemonicParsing="false" text="All webcasts" onAction="#goToAllWebcasts"/> -->
-            <!-- <MenuItem mnemonicParsing="false" text="All accounts" onAction="#goToWebcastProgressAll"/> -->
             <MenuItem mnemonicParsing="false" text="Webcast Progress Per Student" onAction="#goToWebcastProgressSelected"/>
             <MenuItem mnemonicParsing="false" text="Top Webcasts" onAction="#goToTopWebcasts"/>
           </items>
@@ -50,11 +48,11 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label layoutX="136.0" layoutY="171.0" text="Welcome to the Academy Of Code">
+            <Label layoutX="27.0" layoutY="18.0" text="All students:">
                <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+            <ListView layoutX="27.0" layoutY="46.0" prefHeight="311.0" prefWidth="581.0" />
          </children>
     </AnchorPane>
   </children>

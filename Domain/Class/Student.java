@@ -14,9 +14,10 @@ public class Student {
     private String postalCode;
     private String city;
     private String country;
+    private String houseNumber;
+    private String postalCode;
 
-    public Student(int id, String email, String name, LocalDate birthDate, Gender gender, String address,
-            String houseNumber, String postalCode, String city, String country) {
+    public Student(int id, String email, String name, LocalDate birthDate, Gender gender, String address, String city, String country, String houseNumber, String postalCode) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -40,6 +41,8 @@ public class Student {
         this.postalCode = postalCode;
         this.city = city;
         this.country = country;
+        this.houseNumber = houseNumber;
+        this.postalCode = postalCode;
     }
 
     public int getId() {
@@ -120,5 +123,21 @@ public class Student {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getHouseNumber() { 
+        return houseNumber; 
+    }
+
+    public void setHouseNumber(String houseNumber) { 
+        this.houseNumber = houseNumber; 
+    }
+    
+    public String getPostalCode() { 
+        return postalCode; 
+    }
+
+    public void setPostalCode(String postalCode) { 
+        this.postalCode = postalCode; 
     }
 }
